@@ -1,0 +1,5 @@
+<img
+  src={`https://avatars.dicebear.com/api/initials/${encodeURIComponent('Likithasri')}.svg`}
+  alt="User Avatar"
+  className="w-8 h-8 rounded-full"
+/>
