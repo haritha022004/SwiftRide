@@ -15,11 +15,11 @@ function Profile() {
         <div className="space-y-2">
           <div className="flex justify-between">
             <span className="font-semibold text-gray-600 dark:text-gray-300">Name:</span>
-            <span className="text-gray-800 dark:text-gray-100">Likithasri</span>
+            <span className="text-gray-800 dark:text-gray-100">sai nikhil chitra</span>
           </div>
           <div className="flex justify-between">
             <span className="font-semibold text-gray-600 dark:text-gray-300">Email:</span>
-            <span className="text-gray-800 dark:text-gray-100">harithasri@example.com</span>
+            <span className="text-gray-800 dark:text-gray-100">sainikhilchitra@gmail.com</span>
           </div>
           <div className="flex justify-between">
             <span className="font-semibold text-gray-600 dark:text-gray-300">Joined:</span>
