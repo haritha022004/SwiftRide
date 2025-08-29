@@ -5,7 +5,7 @@ function Home() {
     <div className="space-y-4">
       {/* ✅ Tailwind Test Box */}
       <div className="bg-green-500 text-white p-4 rounded shadow-md">
-        ✅ Tailwind is working!
+        ✅ welcome to bike rental app (29-08-2025)
       </div>
 
       {/* Your actual homepage content can go below */}
