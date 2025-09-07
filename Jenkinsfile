@@ -11,11 +11,17 @@ pipeline {
         stage('Run Tests in Docker') {
             steps {
                 script {
+                    echo "==== Building Dev Docker Image ===="
+                    // Build the dev image using Dockerfile.dev
+                    bat """
+                        docker build -t ${DOCKER_IMAGE}-dev -f Dockerfile.dev .
+                    """
+
                     echo "==== Running Tests in Docker ===="
                     // Run tests live, output directly to Jenkins console
                     // Use '|| exit 0' so Jenkins doesn't fail on test failures
                     bat """
-                        docker run --rm ${DOCKER_IMAGE} sh -c "npm test -- --reporters=default || exit 0"
+                        docker run --rm ${DOCKER_IMAGE}-dev sh -c "npm test -- --reporters=default || exit 0"
                     """
                     echo "==== Test Execution Complete ===="
                 }
@@ -36,10 +42,10 @@ pipeline {
 
                     echo "Posting commit status to GitHub..."
                     bat """
-                    curl -H "Authorization: token ${GITHUB_TOKEN}" ^
-                         -H "Accept: application/vnd.github.v3+json" ^
-                         -X POST ^
-                         -d "{\\"state\\": \\"${state}\\", \\"context\\": \\"Jenkins CI\\", \\"description\\": \\"${description}\\"}" ^
+                    curl -H "Authorization: token ${GITHUB_TOKEN}" ^ 
+                         -H "Accept: application/vnd.github.v3+json" ^ 
+                         -X POST ^ 
+                         -d "{\\"state\\": \\"${state}\\", \\"context\\": \\"Jenkins CI\\", \\"description\\": \\"${description}\\"}" ^ 
                          https://api.github.com/repos/haritha022004/SwiftRide/statuses/${commitSHA}
                     """
                 }
