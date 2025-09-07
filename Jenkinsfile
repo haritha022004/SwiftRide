@@ -18,12 +18,6 @@ pipeline {
         stage('Run Tests in Docker') {
             steps {
                 script {
-                    echo "==== Building Dev Docker Image ===="
-                    // Build the dev image using Dockerfile.dev
-                    bat """
-                        docker build -t ${DOCKER_IMAGE}-dev -f Dockerfile.dev .
-                    """
-
                     echo "==== Running Tests in Docker ===="
                     // Run tests and capture exit code
                     def exitCode = bat(script: "docker run --rm ${DOCKER_IMAGE} sh -c \"npm test -- --reporters=default\"", returnStatus: true)
