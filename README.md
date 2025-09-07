@@ -94,7 +94,7 @@ Team Contributions
 
 Nihal (23211a6723) – Frontend Development
 
-Nihal the frontend development using React.js, designing and implementing dynamic, interactive, and responsive UI components. He manages application state, routing, and forms 
+Nihal the frontend developer using React.js, designing and implementing dynamic, interactive, and responsive UI components. He manages application state, routing, and forms 
 to ensure smooth navigation and user experience. Nihal collaborates closely with backend developers to integrate REST APIs, ensuring that data flows correctly and features function as 
 intended. He also enforces coding standards and best practices in frontend development, contributing to maintainable, scalable, and visually consistent interfaces across the platform.
 
