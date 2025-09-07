@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'swiftride:latest'
+        TEST_IMAGE   = 'swiftride-test:latest' // used only for CI tests
     }
 
     stages {
@@ -10,8 +10,16 @@ pipeline {
         stage('Check Docker') {
             steps {
                 echo "==== Checking Docker ===="
-                // Will fail immediately if Docker is not available
                 bat 'docker version'
+            }
+        }
+
+        stage('Build Test Image') {
+            steps {
+                script {
+                    echo "==== Building Docker Test Image ===="
+                    bat "docker build -f Dockerfile.dev -t ${TEST_IMAGE} ."
+                }
             }
         }
 
@@ -19,11 +27,9 @@ pipeline {
             steps {
                 script {
                     echo "==== Running Tests in Docker ===="
-                    // Run tests and capture exit code
-                    def exitCode = bat(script: "docker run --rm ${DOCKER_IMAGE} sh -c \"npm test -- --reporters=default\"", returnStatus: true)
+                    def exitCode = bat(script: "docker run --rm ${TEST_IMAGE}", returnStatus: true)
                     echo "Test exit code: ${exitCode}"
 
-                    // Save result for later stage
                     env.TEST_RESULT = (exitCode == 0) ? "success" : "failure"
                 }
             }
@@ -31,10 +37,9 @@ pipeline {
 
         stage('Post Status to GitHub PR') {
             when {
-                expression { return env.CHANGE_ID != null } // Only for PR builds
+                expression { return env.CHANGE_ID != null }
             }
             steps {
-                // Use withCredentials to securely handle GitHub token
                 withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
                     script {
                         def state = env.TEST_RESULT
@@ -43,7 +48,6 @@ pipeline {
 
                         echo "Posting commit status to GitHub..."
 
-                        // Single-line bat command, proper Windows escaping
                         bat "curl -H \"Authorization: token %TOKEN%\" -H \"Accept: application/vnd.github.v3+json\" -X POST -d \"{\\\"state\\\":\\\"${state}\\\",\\\"context\\\":\\\"Jenkins CI\\\",\\\"description\\\":\\\"${description}\\\"}\" https://api.github.com/repos/haritha022004/SwiftRide/statuses/${commitSHA}"
                     }
                 }
