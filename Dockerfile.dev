@@ -1,0 +1,20 @@
+# Dockerfile.dev
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy frontend package.json for caching
+COPY package*.json ./
+
+# Install dependencies (frontend + dev)
+RUN npm install
+
+# Copy all frontend files
+COPY . .
+
+# Set CI mode for testing
+ENV CI=true
+
+# Run tests
+CMD ["npm", "test", "--", "--watchAll=false", "--reporters=default", "--reporters=jest-junit"]

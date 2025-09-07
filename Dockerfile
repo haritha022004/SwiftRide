@@ -1,24 +1,33 @@
-# Use lightweight Node image
-FROM node:18-alpine
+# Stage 1: Build React frontend
+FROM node:18-alpine AS build
 
-# Install build tools for native modules
-RUN apk add --no-cache python3 make g++
-
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json first for caching
+# Install frontend dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the project
+# Copy all frontend code
 COPY . .
+RUN npm run build
 
-# Set CI environment variable
-ENV CI=true
+# Stage 2: Backend + serve frontend
+FROM node:18-alpine
 
-# Run tests once and generate JUnit report
-# The report file will be picked up by Jenkins
-CMD ["npm", "test", "--", "--watchAll=false", "--reporters=default", "--reporters=jest-junit"]
+WORKDIR /app/backend
+
+# Install backend dependencies
+COPY backend/package*.json ./
+RUN npm install
+
+# Copy backend code
+COPY backend ./
+
+# Copy React build folder from frontend
+COPY --from=build /app/build ../build
+
+# Expose backend port
+EXPOSE 3000
+
+# Start backend (serves React build as well)
+CMD ["node", "index.js"]
