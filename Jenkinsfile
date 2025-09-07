@@ -3,27 +3,28 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'swiftride:latest'
-        GITHUB_TOKEN = credentials('github-token') // GitHub App token
     }
 
     stages {
 
+        stage('Check Docker') {
+            steps {
+                echo "==== Checking Docker ===="
+                // Will fail immediately if Docker is not available
+                bat 'docker version'
+            }
+        }
+
         stage('Run Tests in Docker') {
             steps {
                 script {
-                    echo "==== Building Dev Docker Image ===="
-                    // Build the dev image using Dockerfile.dev
-                    bat """
-                        docker build -t ${DOCKER_IMAGE}-dev -f Dockerfile.dev .
-                    """
-
                     echo "==== Running Tests in Docker ===="
-                    // Run tests live, output directly to Jenkins console
-                    // Use '|| exit 0' so Jenkins doesn't fail on test failures
-                    bat """
-                        docker run --rm ${DOCKER_IMAGE}-dev sh -c "npm test -- --reporters=default || exit 0"
-                    """
-                    echo "==== Test Execution Complete ===="
+                    // Run tests and capture exit code
+                    def exitCode = bat(script: "docker run --rm ${DOCKER_IMAGE} sh -c \"npm test -- --reporters=default\"", returnStatus: true)
+                    echo "Test exit code: ${exitCode}"
+
+                    // Save result for later stage
+                    env.TEST_RESULT = (exitCode == 0) ? "success" : "failure"
                 }
             }
         }
@@ -33,21 +34,18 @@ pipeline {
                 expression { return env.CHANGE_ID != null } // Only for PR builds
             }
             steps {
-                script {
-                    // Capture exit code to determine pass/fail
-                    def passed = currentBuild.currentResult == 'SUCCESS'
-                    def state = passed ? "success" : "failure"
-                    def description = passed ? "All tests passed" : "Some tests failed"
-                    def commitSHA = env.GIT_COMMIT
+                // Use withCredentials to securely handle GitHub token
+                withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
+                    script {
+                        def state = env.TEST_RESULT
+                        def description = (state == "success") ? "All tests passed" : "Some tests failed"
+                        def commitSHA = env.GIT_COMMIT
 
-                    echo "Posting commit status to GitHub..."
-                    bat """
-                    curl -H "Authorization: token ${GITHUB_TOKEN}" ^ 
-                         -H "Accept: application/vnd.github.v3+json" ^ 
-                         -X POST ^ 
-                         -d "{\\"state\\": \\"${state}\\", \\"context\\": \\"Jenkins CI\\", \\"description\\": \\"${description}\\"}" ^ 
-                         https://api.github.com/repos/haritha022004/SwiftRide/statuses/${commitSHA}
-                    """
+                        echo "Posting commit status to GitHub..."
+
+                        // Single-line bat command, proper Windows escaping
+                        bat "curl -H \"Authorization: token %TOKEN%\" -H \"Accept: application/vnd.github.v3+json\" -X POST -d \"{\\\"state\\\":\\\"${state}\\\",\\\"context\\\":\\\"Jenkins CI\\\",\\\"description\\\":\\\"${description}\\\"}\" https://api.github.com/repos/haritha022004/SwiftRide/statuses/${commitSHA}"
+                    }
                 }
             }
         }
