@@ -21,43 +21,44 @@ Project Modules and Flow
 
 1. Development
    
-•	Implements full-stack development of user and admin portals.
+   •	Implements full-stack development of user and admin portals.
 
-•	Provides REST APIs for bike management, bookings, authentication, and document verification.
+   •	Provides REST APIs for bike management, bookings, authentication, and document verification.
 
-•	Uses React.js for the frontend and Node.js + Express.js for the backend.
+   •	Uses React.js for the frontend and Node.js + Express.js for the backend.
 
 2. Containerization
    
-•	Containerizes the entire application using Docker, ensuring portability and consistency across development, testing, and deployment environments.
+   •	Containerizes the entire application using Docker, ensuring portability and consistency across development, testing, and deployment environments.
 
-•	Docker images are used in both local testing and CI/CD pipelines.
+   •	Docker images are used in both local testing and CI/CD pipelines.
 
 3. CI/CD with Jenkins
    
-•	Configures Jenkins pipelines to automatically build Docker images, run test suites, and report results back to GitHub.
+   •	Configures Jenkins pipelines to automatically build Docker images, run test suites, and report results back to GitHub.
 
-•	GitHub webhooks trigger Jenkins whenever a feature branch is pushed or a pull request is raised.
+   •	GitHub webhooks trigger Jenkins whenever a feature branch is pushed or a pull request is raised.
 
-•	The CI/CD pipeline ensures that functionality, scalability, and reliability are validated before code merges, maintaining high-quality standards.
+   •	The CI/CD pipeline ensures that functionality, scalability, and reliability are validated before code merges, maintaining high-quality standards.
 
 4. Cloud Deployment
    
-•	Deploys the application on Render, which automatically builds Docker images and handles deployment.
+   •	Deploys the application on Render, which automatically builds Docker images and handles deployment.
 
-•	Eliminates the need for manual Kubernetes setup while providing managed cloud hosting, continuous deployment, and easy updates.
+   •	Eliminates the need for manual Kubernetes setup while providing managed cloud hosting, continuous deployment, and easy updates.
 
 5. Testing & Validation
    
-•	Performs end-to-end testing triggered via GitHub → Jenkins → Docker workflow.
+   •	Performs end-to-end testing triggered via GitHub → Jenkins → Docker workflow.
 
-•	Jenkins builds a Docker testing image, executes the test suite, and reports the status back to GitHub.
+   •	Jenkins builds a Docker testing image, executes the test suite, and reports the status back to GitHub.
 
-•	This setup provides immediate feedback for developers and ensures the application is stable, reliable, and production-ready.
+   •	This setup provides immediate feedback for developers and ensures the application is stable, reliable, and production-ready.
 ________________________________________
 System Overview
 
 User Roles:
+
 1.	Guest Users: Browse available bikes without logging in.
 
 2.	Registered Users (Renters): Book bikes, upload verification documents, and make payments.
@@ -68,11 +69,11 @@ User Roles:
 
 System Flow:
 
-•	Booking Flow: Guest → View Bikes → Login/Signup → Upload Documents → Admin Approval → QR Payment → Booking Confirmation.
+   •	Booking Flow: Guest → View Bikes → Login/Signup → Upload Documents → Admin Approval → QR Payment → Booking Confirmation.
 
-•	Renting Flow: Owner → Sign Up/Login → Add Bike Details & Documents → Admin Approval → Make Available → Receive Booking Requests.
+   •	Renting Flow: Owner → Sign Up/Login → Add Bike Details & Documents → Admin Approval → Make Available → Receive Booking Requests.
 
-•	Admin Flow: Admin → Login → Manage Requests → Verify Documents → Fix Prices → Approve/Reject → Notify Users & Owners → Handle Disputes.
+   •	Admin Flow: Admin → Login → Manage Requests → Verify Documents → Fix Prices → Approve/Reject → Notify Users & Owners → Handle Disputes.
 ________________________________________
 Technology Stack
 
