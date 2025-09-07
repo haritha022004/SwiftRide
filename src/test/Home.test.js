@@ -22,7 +22,7 @@ describe("Home Page", () => {
     );
   });
 
-  test("renders headings and CTA buttons", () => {
+  test("Renders headings and CTA buttons", () => {
     // Hero heading
     expect(screen.getByRole("heading", { name: /welcome to swiftride/i })).toBeInTheDocument();
 
