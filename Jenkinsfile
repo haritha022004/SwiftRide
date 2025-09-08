@@ -58,6 +58,22 @@ pipeline {
 
     post {
         always {
+            script {
+                def subjectLine = (env.CHANGE_ID != null) ?
+                    "PR #${env.CHANGE_ID} Build ${currentBuild.currentResult}" :
+                    "Branch ${env.BRANCH_NAME} Build ${currentBuild.currentResult}"
+
+                emailext(
+                    subject: subjectLine,
+                    body: """<h3>Jenkins Build Notification</h3>
+                             <p><b>Result:</b> ${currentBuild.currentResult}</p>
+                             <p><b>Job:</b> ${env.JOB_NAME}</p>
+                             <p><b>Build #:</b> ${env.BUILD_NUMBER}</p>
+                             <p><b>Branch/PR:</b> ${env.BRANCH_NAME}</p>
+                             <p><b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
+                    to: "anjalilingampet@gmail.com"
+                )
+            }
             echo "Pipeline finished. Check console output and PR status."
         }
         failure {
