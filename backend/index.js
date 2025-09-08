@@ -1,7 +1,15 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const bodyParser = require("body-parser");
+
+const mailRoutes = require("./routes/mail");
+
 const app = express();
+app.use(bodyParser.json());
+
+// ✅ Use Mail Routes
+app.use("/api", mailRoutes);
 
 // Path to React build
 const buildPath = path.join(__dirname, '../build');
