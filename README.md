@@ -88,7 +88,7 @@ ________________________________________
    
    •	<b>CI/CD:</b> Jenkins with GitHub webhooks
    
-   •	<b>Authentication:</b> OTP-based via email/phone
+   •	<b>Authentication:</b> OTP-based via email.
 
 ________________________________________
 
