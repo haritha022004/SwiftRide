@@ -3,13 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require("body-parser");
 
-const mailRoutes = require("./routes/mail");
 
 const app = express();
 app.use(bodyParser.json());
-
-// ✅ Use Mail Routes
-app.use("/api", mailRoutes);
 
 // Path to React build
 const buildPath = path.join(__dirname, '../build');
@@ -29,7 +25,7 @@ if (fs.existsSync(buildPath)) {
     });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
