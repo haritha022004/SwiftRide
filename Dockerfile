@@ -27,7 +27,7 @@ COPY backend ./
 COPY --from=build /app/build ../build
 
 # Expose backend port
-EXPOSE 3000
+EXPOSE 5000
 
 # Start backend (serves React build as well)
 CMD ["node", "index.js"]

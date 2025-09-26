@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/styles.css";
-import "../styles/components/SignIn.css";
+import "../styles/SignIn.css";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
