@@ -19,6 +19,7 @@ function App() {
             <Route path="/ridebooking" element={<RideBooking />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/rent-home" element={<h1>Rent Home is Under Construction</h1>} />
         </Routes>
         <Footer/>
     </>

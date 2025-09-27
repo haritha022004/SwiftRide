@@ -1,21 +1,36 @@
+// Sign in page for users who rent their bikes.
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/styles.css";
 import "../styles/SignIn.css";
 
 export default function SignIn() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Connect with backend API
-    console.log("Logging in:", { username, password, rememberMe });
-    
-    // Navigate to SendRequest page after successful login
-    navigate("/send-request");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/rent-user/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        console.log("Login success:", data);
+        // Navigate to Rent Home
+        navigate("/rent-home");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (err) {
+      console.error("Error logging in:", err);
+      alert("Something went wrong");
+    }
   };
 
   return (
@@ -29,10 +44,10 @@ export default function SignIn() {
         <form onSubmit={handleSubmit} className="signin-form">
           <div className="form-group">
             <input
-              type="text"
-              placeholder="Username or Email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="form-input"
               required
             />
@@ -49,27 +64,13 @@ export default function SignIn() {
             />
           </div>
 
-          <div className="form-options">
-            <label className="remember-me">
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />
-              Remember me
-            </label>
-            <a href="#forgot" className="forgot-password">
-              Forgot password?
-            </a>
-          </div>
-
           <button type="submit" className="signin-button">
             Sign In & Manage Rentals
           </button>
         </form>
 
         <div className="signup-link">
-          Don't have an account? <Link to="/signup">Sign up here</Link>
+          Don&apos;t have an account? <Link to="/signup">Sign up here</Link>
         </div>
       </div>
     </div>
