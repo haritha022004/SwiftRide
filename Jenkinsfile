@@ -2,35 +2,53 @@ pipeline {
     agent any
 
     environment {
-        TEST_IMAGE   = 'swiftride-test:latest' // used only for CI tests
+        FRONTEND_IMAGE = 'swiftride-frontend-test:latest'
+        BACKEND_IMAGE  = 'swiftride-backend-test:latest'
     }
 
     stages {
-
         stage('Check Docker') {
             steps {
-                echo "==== Checking Docker ===="
                 bat 'docker version'
             }
         }
 
-        stage('Build Test Image') {
-            steps {
-                script {
-                    echo "==== Building Docker Test Image ===="
-                    bat "docker build -f Dockerfile.dev -t ${TEST_IMAGE} ."
+        stage('Build Test Images') {
+            parallel {
+                stage('Build Frontend Image') {
+                    steps {
+                        bat "docker build -f Dockerfile.frontend -t ${FRONTEND_IMAGE} ."
+                    }
+                }
+                stage('Build Backend Image') {
+                    steps {
+                        bat "docker build -f Dockerfile.backend -t ${BACKEND_IMAGE} ."
+                    }
                 }
             }
         }
 
-        stage('Run Tests in Docker') {
-            steps {
-                script {
-                    echo "==== Running Tests in Docker ===="
-                    def exitCode = bat(script: "docker run --rm ${TEST_IMAGE}", returnStatus: true)
-                    echo "Test exit code: ${exitCode}"
-
-                    env.TEST_RESULT = (exitCode == 0) ? "success" : "failure"
+        stage('Run Tests') {
+            parallel {
+                stage('Frontend Tests') {
+                    steps {
+                        script {
+                            echo "==== Running Frontend Tests ===="
+                            def exitCode = bat(script: "docker run --rm ${FRONTEND_IMAGE}", returnStatus: true)
+                            echo "Frontend exit code: ${exitCode}"
+                            env.FRONTEND_RESULT = (exitCode == 0) ? "success" : "failure"
+                        }
+                    }
+                }
+                stage('Backend Tests') {
+                    steps {
+                        script {
+                            echo "==== Running Backend Tests ===="
+                            def exitCode = bat(script: "docker run --rm ${BACKEND_IMAGE}", returnStatus: true)
+                            echo "Backend exit code: ${exitCode}"
+                            env.BACKEND_RESULT = (exitCode == 0) ? "success" : "failure"
+                        }
+                    }
                 }
             }
         }
@@ -42,18 +60,16 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
                     script {
-                        def state = env.TEST_RESULT
-                        def description = (state == "success") ? "All tests passed" : "Some tests failed"
+                        def overall = (env.FRONTEND_RESULT == "success" && env.BACKEND_RESULT == "success") ? "success" : "failure"
+                        def description = "Frontend: ${env.FRONTEND_RESULT}, Backend: ${env.BACKEND_RESULT}"
                         def commitSHA = env.GIT_COMMIT
 
                         echo "Posting commit status to GitHub..."
-
-                        bat "curl -H \"Authorization: token %TOKEN%\" -H \"Accept: application/vnd.github.v3+json\" -X POST -d \"{\\\"state\\\":\\\"${state}\\\",\\\"context\\\":\\\"Jenkins CI\\\",\\\"description\\\":\\\"${description}\\\"}\" https://api.github.com/repos/haritha022004/SwiftRide/statuses/${commitSHA}"
+                        bat "curl -H \"Authorization: token %TOKEN%\" -H \"Accept: application/vnd.github.v3+json\" -X POST -d \"{\\\"state\\\":\\\"${overall}\\\",\\\"context\\\":\\\"Jenkins CI\\\",\\\"description\\\":\\\"${description}\\\"}\" https://api.github.com/repos/haritha022004/SwiftRide/statuses/${commitSHA}"
                     }
                 }
             }
         }
-
     }
 
     post {
@@ -67,6 +83,8 @@ pipeline {
                     subject: subjectLine,
                     body: """<h3>Jenkins Build Notification</h3>
                              <p><b>Result:</b> ${currentBuild.currentResult}</p>
+                             <p><b>Frontend:</b> ${env.FRONTEND_RESULT}</p>
+                             <p><b>Backend:</b> ${env.BACKEND_RESULT}</p>
                              <p><b>Job:</b> ${env.JOB_NAME}</p>
                              <p><b>Build #:</b> ${env.BUILD_NUMBER}</p>
                              <p><b>Branch/PR:</b> ${env.BRANCH_NAME}</p>
@@ -75,12 +93,6 @@ pipeline {
                 )
             }
             echo "Pipeline finished. Check console output and PR status."
-        }
-        failure {
-            echo "Pipeline finished with failures."
-        }
-        success {
-            echo "Pipeline finished successfully."
         }
     }
 }
