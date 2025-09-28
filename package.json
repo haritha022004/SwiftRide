@@ -15,7 +15,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:frontend": "npm test -- --watchAll=false",                 
+    "test:backend": "npm test --prefix backend",  
+    "test:all": "npm run test:backend && npm run test:frontend"
   },
   "eslintConfig": {
     "extends": [

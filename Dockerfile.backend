@@ -1,0 +1,20 @@
+# Dockerfile.backend
+
+FROM node:18-bullseye
+
+WORKDIR /app
+
+# Copy backend package files
+COPY backend/package*.json ./
+
+# Install backend dependencies
+RUN npm install
+
+# Copy backend source files
+COPY backend ./
+
+# Set CI mode for Jest tests
+ENV CI=true
+
+# Run backend tests
+CMD ["npm", "test", "--", "--watchAll=false", "--reporters=default", "--reporters=jest-junit"]
