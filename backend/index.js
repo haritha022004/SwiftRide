@@ -36,14 +36,14 @@ if (fs.existsSync(buildPath)) {
 
 // MongoDB connection (skip if testing)
 if (process.env.NODE_ENV !== "test") {
-    mongoose.connect('mongodb://127.0.0.1:27017/swiftride')
+    mongoose.connect('mongodb+srv://sainikhilchitra:z0nKhuwK79g2Fktk@swiftride.ppyeu39.mongodb.net/swiftride?retryWrites=true&w=majority&appName=swiftride')
         .then(() => console.log('MongoDB connected'))
         .catch(err => console.error('MongoDB connection error:', err));
 
-    const PORT = process.env.PORT || 5000;
+    const PORT = 5000;
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
 }
 
-module.exports = app; // <-- export the app for testing
+module.exports = app; 

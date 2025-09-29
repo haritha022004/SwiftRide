@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/styles.css";
 import "../styles/SignUp.css";
 
+import url from "../config";
+
 export default function SignUp() {
   const [form, setForm] = useState({
     username: "",
@@ -34,15 +36,18 @@ export default function SignUp() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/rent-user/register", {
+      const res = await fetch(`${url}/api/rent-user/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
-      if (!res.ok) throw new Error("Failed to register");
-
       const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Registration failed");
+        return;
+      }
+
       console.log("User registered:", data);
       navigate("/signin");
     } catch (err) {

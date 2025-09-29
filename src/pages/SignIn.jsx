@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/styles.css";
 import "../styles/SignIn.css";
-
+import url from "../config";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +13,7 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/rent-user/signin", {
+      const res = await fetch(`${url}/api/rent-user/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
