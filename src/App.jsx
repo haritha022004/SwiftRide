@@ -9,6 +9,8 @@ import './styles/Footer.css'
 import RideBooking from './pages/RideBooking';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import AddBike from './pages/AddBike';
+import RentHome from './pages/RentHome';
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
             <Route path="/ridebooking" element={<RideBooking />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/rent-home" element={<h1>Rent Home is Under Construction</h1>} />
+            <Route path="/rent-home" element={<RentHome />} />
+            <Route path='/add-bike' element={<AddBike />} />
         </Routes>
         <Footer/>
     </>

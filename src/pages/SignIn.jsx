@@ -22,7 +22,7 @@ export default function SignIn() {
       const data = await res.json();
       if (res.ok) {
         console.log("Login success:", data);
-        // Navigate to Rent Home
+        sessionStorage.setItem("userEmail", email);
         navigate("/rent-home");
       } else {
         alert(data.message || "Login failed");

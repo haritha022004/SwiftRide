@@ -80,15 +80,13 @@ ________________________________________
    
    •	<b>Backend:</b> Node.js, Express.js
    
-   •	<b>Storage</b>: Firebase realtime storage and documents.
+   •	<b>Storage</b>: MongoDB Atlas.
 
    •	<b>Deployment/Hosting:</b> Render
    
    •	<b>Containerization:</b> Docker
    
    •	<b>CI/CD:</b> Jenkins with GitHub webhooks
-   
-   •	<b>Authentication:</b> OTP-based via email.
 
 ________________________________________
 
@@ -102,7 +100,7 @@ to ensure smooth navigation and user experience. He also enforces coding standar
 <h4>Nikhil (23211a6724)– Backend & Jenkins</h4>
 
 Nikhil oversees the backend development using Node.js and Express.js, building REST APIs that handle user authentication, bookings, bike management, and payment integration. He integrates 
-Firebase Cloud Storage for secure file handling and document storage. Additionally, Nikhil manages the Jenkins CI/CD pipeline, automating Docker image builds, executing test suites, and 
+Mongodb Storage for secure file handling and document storage. Additionally, Nikhil manages the Jenkins CI/CD pipeline, automating Docker image builds, executing test suites, and 
 reporting results back to GitHub. His work ensures reliable code integration, faster development cycles, and smooth deployment to the cloud.
 
 <h4>Sai Ram (23211a6745)– Frontend & Render Deployment</h4>

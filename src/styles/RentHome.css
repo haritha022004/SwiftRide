@@ -1,0 +1,414 @@
+/* RentHome.css */
+.rent-home-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.rent-home-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem 0;
+}
+
+.rent-home-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #f1f3f4;
+}
+
+.header-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.rent-home-header h1 {
+  color: #2c3e50;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rent-home-header p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Loading State */
+.rent-home-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Action Section */
+.action-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.add-bike-btn {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+}
+
+.add-bike-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(39, 174, 96, 0.4);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+/* Bikes Section */
+.bikes-section {
+  width: 100%;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  border-radius: 20px;
+  border: 3px dashed #e9ecef;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.empty-state-btn {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.empty-state-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+}
+
+/* Bikes Grid */
+.bikes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.bike-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f3f4;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bike-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.bike-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bike-card-header {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bike-title {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.bike-year {
+  color: #7f8c8d;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #f8f9fa;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+}
+
+/* Bike Specs */
+.bike-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.spec-label {
+  color: #7f8c8d;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.spec-value {
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.bike-description {
+  background: #e3f2fd;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3498db;
+}
+
+.bike-description p {
+  color: #2c3e50;
+  margin: 0;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Images Section */
+.bike-images {
+  margin-bottom: 1.5rem;
+}
+
+.bike-images h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.image-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.image-item:hover {
+  transform: scale(1.05);
+}
+
+.bike-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Documents Section */
+.bike-documents {
+  margin-bottom: 2rem;
+}
+
+.bike-documents h4 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.document-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.document-link:hover {
+  background: #e3f2fd;
+  border-color: #3498db;
+  transform: translateX(5px);
+}
+
+.doc-icon {
+  font-size: 1.2rem;
+}
+
+/* Actions Section */
+.bike-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+  border-top: 2px solid #f1f3f4;
+}
+
+.make-available-btn {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+}
+
+.make-available-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(39, 174, 96, 0.4);
+  background: linear-gradient(135deg, #229954 0%, #27ae60 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rent-home-container {
+    padding: 1rem;
+  }
+  
+  .rent-home-card {
+    padding: 2rem 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .rent-home-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .bikes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bike-specs {
+    grid-template-columns: 1fr;
+  }
+  
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .rent-home-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .rent-home-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .bike-card {
+    padding: 1.5rem;
+  }
+  
+  .images-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .add-bike-btn,
+  .make-available-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

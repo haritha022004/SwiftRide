@@ -1,0 +1,455 @@
+/* AddBike.css */
+.add-bike-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-bike-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem 0;
+}
+
+.add-bike-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #f1f3f4;
+}
+
+.header-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.add-bike-header h1 {
+  color: #2c3e50;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.add-bike-header p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.add-bike-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.form-section {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.form-section:focus-within {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.section-title {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  padding: 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+  border-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.error-text {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.feature-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.feature-checkbox:hover {
+  border-color: #3498db;
+  background: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+.feature-checkbox input {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-checkbox input:checked + .checkmark {
+  background: #27ae60;
+  border-color: #27ae60;
+}
+
+.feature-checkbox input:checked + .checkmark::after {
+  content: "✓";
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.feature-label {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+/* Textarea */
+.form-textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* Image Upload Styles */
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.image-input {
+  display: none;
+}
+
+.image-upload-label {
+  padding: 2rem;
+  border: 3px dashed #3498db;
+  border-radius: 15px;
+  background: #e3f2fd;
+  color: #3498db;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.image-upload-label:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+  border-color: #2980b9;
+}
+
+.upload-icon {
+  font-size: 2rem;
+}
+
+.upload-hint {
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #7f8c8d;
+}
+
+.image-previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.image-preview-item {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.image-preview-item:hover {
+  transform: scale(1.05);
+}
+
+.image-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-image-btn,
+.remove-doc-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.remove-image-btn:hover,
+.remove-doc-btn:hover {
+  background: #c0392b;
+  transform: scale(1.1);
+}
+
+/* Documents */
+.documents-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.document-item {
+  background: #e3f2fd;
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  color: #3498db;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.document-item:hover {
+  border-color: #3498db;
+  transform: translateY(-2px);
+}
+
+.doc-name {
+  font-weight: 500;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #f1f3f4;
+}
+
+.submit-bike-btn {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+  padding: 1.2rem 3rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+}
+
+.submit-bike-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(39, 174, 96, 0.4);
+}
+
+.submit-bike-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cancel-btn {
+  background: #95a5a6;
+  color: white;
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.loading-spinner-small {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-bike-container {
+    padding: 1rem;
+  }
+  
+  .add-bike-card {
+    padding: 2rem 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .add-bike-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .form-section {
+    padding: 1.5rem;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .image-previews {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .submit-bike-btn,
+  .cancel-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-bike-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .add-bike-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .form-section {
+    padding: 1rem;
+  }
+  
+  .image-previews {
+    grid-template-columns: 1fr;
+  }
+}
