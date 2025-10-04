@@ -9,6 +9,8 @@ const rentUserSignin = require("./routes/rentUserSignin");
 const rentUserAddBikeRoute = require("./routes/rentUserAddBikeRoute");
 const rentUserGetBikesRoute = require('./routes/rentUserGetBikesRoute');
 const rentUserRentAvailableRoute = require('./routes/rentUserRentAvailableRoute');
+const bookUserGetBikesRoute = require('./routes/bookUserGetBikesRoute');
+
 const app = express();
 
 // Middleware
@@ -24,6 +26,7 @@ app.use("/api/rent-user/signin", rentUserSignin);
 app.use("/api/rent-user/add-bike", rentUserAddBikeRoute);
 app.use('/api/rent-user/get-bikes', rentUserGetBikesRoute);
 app.use('/api/rent-user/rent-available', rentUserRentAvailableRoute);
+app.use('/api/book-user/get-bikes', bookUserGetBikesRoute);
 // Serve React build
 const buildPath = path.join(__dirname, '../build');
 if (fs.existsSync(buildPath)) {
