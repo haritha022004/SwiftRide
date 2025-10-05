@@ -24,7 +24,7 @@ export default function BikeDetails() {
       <h2 style={{ textAlign: "center", marginTop: "50px" }}>🚫 Bike not found</h2>
     );
 
-  const handleBookNow = () => navigate("/login");
+  const handleBookNow = () => navigate("/booking-signin");
 
   return (
     <div className="bike-details-container">

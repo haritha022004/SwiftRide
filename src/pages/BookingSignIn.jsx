@@ -1,8 +1,8 @@
 // Sign in page for users who rent their bikes.
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "../styles/BookingSignIn.css";
 import "../styles/styles.css";
-import "../styles/SignIn.css";
 import url from "../config";
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${url}/api/rent-user/signin`, {
+      const res = await fetch(`${url}/api/book-user/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -23,8 +23,8 @@ export default function SignIn() {
       if (res.ok) {
         console.log("Login success:", data);
         sessionStorage.setItem("userEmail", email);
-        sessionStorage.setItem("userName", data.user.name);
-        navigate("/rent-home");
+        sessionStorage.setItem("userName",data.user.name) ;
+        navigate("/ridebooking");
       } else {
         alert(data.message || "Login failed");
       }
@@ -71,7 +71,7 @@ export default function SignIn() {
         </form>
 
         <div className="signup-link">
-          Don&apos;t have an account? <Link to="/signup">Sign up here</Link>
+          Don&apos;t have an account? <Link to="/booking-signup">Sign up here</Link>
         </div>
       </div>
     </div>
