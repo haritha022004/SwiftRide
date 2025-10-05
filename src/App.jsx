@@ -12,6 +12,8 @@ import SignUp from './pages/SignUp';
 import AddBike from './pages/AddBike';
 import RentHome from './pages/RentHome';
 import BikeDetails from './pages/BikeDetails';
+import BookingSignIn from './pages/BookingSignIn';
+import BookingSignUp from './pages/BookingSignUp';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route path="/rent-home" element={<RentHome />} />
             <Route path='/add-bike' element={<AddBike />} />
             <Route path="/bike-details/:id" element={<BikeDetails />} />
+            <Route path="/booking-signin" element={<BookingSignIn />} />
+            <Route path="/booking-signup" element={<BookingSignUp />} />
         </Routes>
         <Footer/>
     </>

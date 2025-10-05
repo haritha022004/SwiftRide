@@ -5,12 +5,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const rentUserRegisterRoute = require('./routes/rentUserRegisterRoute');
-const rentUserSignin = require("./routes/rentUserSignin");
+const rentUserSigninRoute = require("./routes/rentUserSigninRoute");
 const rentUserAddBikeRoute = require("./routes/rentUserAddBikeRoute");
 const rentUserGetBikesRoute = require('./routes/rentUserGetBikesRoute');
 const rentUserRentAvailableRoute = require('./routes/rentUserRentAvailableRoute');
 const bookUserGetBikesRoute = require('./routes/bookUserGetBikesRoute');
-
+const bookUserRegisterRoute = require('./routes/bookUserRegisterRoute');
+const bookUserSigninRoute = require('./routes/bookUserSigninRoute');
 const app = express();
 
 // Middleware
@@ -22,11 +23,14 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // API Routes
 app.use('/api/rent-user/register', rentUserRegisterRoute);
-app.use("/api/rent-user/signin", rentUserSignin);
+app.use("/api/rent-user/signin", rentUserSigninRoute);
 app.use("/api/rent-user/add-bike", rentUserAddBikeRoute);
 app.use('/api/rent-user/get-bikes', rentUserGetBikesRoute);
 app.use('/api/rent-user/rent-available', rentUserRentAvailableRoute);
 app.use('/api/book-user/get-bikes', bookUserGetBikesRoute);
+app.use('/api/book-user/signup',bookUserRegisterRoute);
+app.use('/api/book-user/signin',bookUserSigninRoute);
+
 // Serve React build
 const buildPath = path.join(__dirname, '../build');
 if (fs.existsSync(buildPath)) {

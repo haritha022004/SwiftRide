@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/styles.css";
 import "../styles/RideBooking.css";
+import "../styles/styles.css";
 import url from "../config";
 
 export default function RideBooking() {
@@ -47,7 +47,7 @@ export default function RideBooking() {
             const image = bike.bikeImages?.[0]?.data || "https://tse1.mm.bing.net/th/id/OIP.vbN9YIRbZJsQCpOXXEadOgHaFj";
 
             return (
-              <div key={bike._id} className="bike-card">
+              <div key={bike._id} className="bike-card no-padding">
                 <div className="bike-image">
                   <img src={image} alt={bike.bikeModel} />
                   <div className="status-badges">
@@ -103,7 +103,7 @@ export default function RideBooking() {
                   >
                     👀 View Details
                   </Link>
-                  <Link to="/login" className="book-button">
+                  <Link to="/booking-signin" className="book-button">
                     📅 Book Now
                   </Link>
                 </div>

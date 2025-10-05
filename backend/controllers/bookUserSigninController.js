@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const User = require("../models/RentUserRegister");
+const User = require("../models/BookUserRegister");
 
 const rentUserSignin = async (req, res) => {
   try {
@@ -25,7 +25,7 @@ const rentUserSignin = async (req, res) => {
     // Success response
     res.json({
       message: "Login successful",
-      user: { id: user._id, email: user.email , name: user.username},
+      user: { id: user._id, email: user.email, name: user.username },
     });
   } catch (err) {
     console.error("Signin error:", err);

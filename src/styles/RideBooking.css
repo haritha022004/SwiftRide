@@ -44,7 +44,6 @@
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  padding: 0 !important;
 }
 .bike-card:hover {
   transform: translateY(-8px);
