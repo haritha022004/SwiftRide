@@ -10,7 +10,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-// Mock alert
+// Mock -alert
 beforeAll(() => {
   window.alert = jest.fn();
 
