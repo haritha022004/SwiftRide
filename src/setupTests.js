@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 
-// Suppress specific warnings
+// Suppress-specific -warnings
 const originalWarn = console.warn;
 beforeAll(() => {
   console.warn = (...args) => {
