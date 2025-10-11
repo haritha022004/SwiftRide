@@ -34,7 +34,7 @@ export default function BikeDetails() {
           <div className="main-image">
             <img
               src={bike.bikeImages?.[selectedImage]?.data || "https://via.placeholder.com/600x400"}
-              alt={bike.bikeModel}
+              alt={`${bike.bikeModel} main`}
               className="main-bike-image"
             />
           </div>
@@ -100,7 +100,9 @@ export default function BikeDetails() {
             <h3>Features</h3>
             <div className="features-grid">
               {bike.features?.length > 0 ? (
-                bike.features.map((f, i) => <span key={i} className="feature-item">✅ {f}</span>)
+                bike.features.map((f, i) => (
+                  <span key={i} className="feature-item">✅ {f}</span>
+                ))
               ) : (
                 <p className="no-features">No features listed</p>
               )}

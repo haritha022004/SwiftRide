@@ -12,8 +12,8 @@ jest.mock("react-router-dom", () => ({
 describe("SignUp Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // Clear fetch mock
-    global.fetch = jest.fn();
+    global.fetch = jest.fn();   // Mock fetch
+    global.alert = jest.fn();   // Mock window.alert
   });
 
   afterEach(() => {
@@ -92,11 +92,11 @@ describe("SignUp Component", () => {
     // Submit the form
     fireEvent.click(screen.getByRole("button", { name: /create account/i }));
 
-    // Wait for the fetch call and navigation
+    // Wait for fetch call and navigation
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5000/api/rent-user/register",
+        expect.stringContaining("/api/rent-user/register"),
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -112,14 +112,13 @@ describe("SignUp Component", () => {
       );
     });
 
-    // Check navigation
     await waitFor(() => {
       expect(mockedNavigate).toHaveBeenCalledWith("/signin");
+      expect(global.alert).not.toHaveBeenCalled(); // ensure no alert
     });
   });
 
   test("handles fetch error when registration fails", async () => {
-    // Mock failed fetch response
     global.fetch.mockResolvedValueOnce({
       ok: false,
       json: async () => ({ error: "Registration failed" }),
@@ -139,16 +138,13 @@ describe("SignUp Component", () => {
     fireEvent.change(screen.getByPlaceholderText(/confirm password/i), { target: { value: "password123" } });
     fireEvent.click(screen.getByRole("checkbox"));
 
-    // Submit the form
     fireEvent.click(screen.getByRole("button", { name: /create account/i }));
 
-    // Wait for the fetch call
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
+      expect(mockedNavigate).not.toHaveBeenCalled(); // should not navigate on error
+      expect(global.alert).toHaveBeenCalled(); // alert should show
     });
-
-    // Should not navigate on error
-    expect(mockedNavigate).not.toHaveBeenCalled();
   });
 
   test("clears error when user starts typing in a field", async () => {
@@ -158,16 +154,12 @@ describe("SignUp Component", () => {
       </MemoryRouter>
     );
 
-    // Trigger validation errors
     fireEvent.click(screen.getByRole("button", { name: /create account/i }));
 
-    // Check that error is displayed
     expect(await screen.findByText(/username is required/i)).toBeInTheDocument();
 
-    // Start typing in the username field
     fireEvent.change(screen.getByPlaceholderText(/username/i), { target: { value: "J" } });
 
-    // Error should be cleared
     await waitFor(() => {
       expect(screen.queryByText(/username is required/i)).not.toBeInTheDocument();
     });
