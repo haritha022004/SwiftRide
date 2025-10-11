@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import RideBooking from "../pages/RideBooking";
 import '@testing-library/jest-dom';
 
-// Suppress specific console warnings and errors during tests
+
 const originalWarn = console.warn;
 beforeAll(() => {
   console.warn = (...args) => {
