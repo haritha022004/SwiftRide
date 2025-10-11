@@ -11,7 +11,7 @@ describe('App Component', () => {
       </MemoryRouter>
     );
     const navbarElements = screen.getAllByText(/SwiftRide/i);
-    expect(navbarElements[0]).toBeInTheDocument(); // first match is the logo
+    expect(navbarElements[0]).toBeInTheDocument(); 
   });
 
   test('renders Footer', () => {
