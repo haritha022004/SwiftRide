@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import Home from "../pages/Home";
 
-// Helper component to read current path
+
 function LocationDisplay() {
   const location = useLocation();
   return <div data-testid="location">{location.pathname}</div>;
