@@ -9,7 +9,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-// Mock sessionStorage
+
 beforeAll(() => {
   window.sessionStorage.setItem("userEmail", "test@example.com");
 });
