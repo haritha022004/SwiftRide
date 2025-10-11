@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Header from "../pages/Header";
 
-// Mock react-router-dom once
 const mockedNavigate = jest.fn();
 const mockedUseLocation = jest.fn();
 
