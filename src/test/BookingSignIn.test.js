@@ -1,4 +1,3 @@
-// src/test/BookingSignIn.test.js
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import SignIn from "../pages/BookingSignIn";
 import { MemoryRouter } from "react-router-dom";
