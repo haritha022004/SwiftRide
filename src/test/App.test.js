@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import App from '../app'; // path to your app.jsx
+import App from '../app'; 
 
 describe('App Component', () => {
   test('renders Navbar', () => {
